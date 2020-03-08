@@ -20,15 +20,15 @@ game.PlayerEntity = me.Entity.extend({
         ]);
 
         // define animations
-        this.renderable.addAnimation("stand", [4]);
-        this.renderable.addAnimation("punch_stomach", [0, 1, 2, 3, 4], 2);
-        /*
-            { name: "pun1", delay: 100 },
-            { name: "pun2", delay: 100 },
-            { name: "pun3", delay: 100 },
-            { name: "pun4", delay: 100 },
-            { name: "pun5", delay: 100 }
-        ]);*/
+        this.renderable.addAnimation("stand", [0]);
+        // this.renderable.addAnimation("punch_stomach", [0, 1, 2, 3, 4], 50);
+        this.renderable.addAnimation("punch_stomach", [
+            { name: "pun1", delay: 50 },
+            { name: "pun2", delay: 50 },
+            { name: "pun3", delay: 50 },
+            { name: "pun4", delay: 50 },
+            { name: "pun5", delay: Infinity }
+        ]);
 
         // define a standing animation (using the first frame)
         //this.renderable.addAnimation("stand", [0]);
@@ -84,7 +84,7 @@ game.PlayerEntity = me.Entity.extend({
 
         // return true if we moved or if the renderable was updated
         //return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
-        return true;
+        return this._super(me.Entity, 'update', [dt]);
     },
 
    /**

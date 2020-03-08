@@ -23,7 +23,7 @@ game.TitleScreen = me.Stage.extend({
         // add a new renderable component with the scrolling text
         this.txt = new (me.Renderable.extend ({
             // constructor
-            init : function () {
+            init : function (x, y) {
                 this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
 
                 // font for the scrolling text
@@ -31,9 +31,21 @@ game.TitleScreen = me.Stage.extend({
                     font: "PressStart2P",
                     textAlign: "center"
                 });
+
+                this.counter = 0;
             },
 
             update : function (dt) {
+                if (this.counter >= 50) {
+                    this.alpha = 0.0;
+                }
+                else {
+                    this.alpha = 1.0;
+                }
+                this.counter++;
+                if (this.counter >= 100) {
+                    this.counter = 0;
+                }
                 return true;
             },
 
