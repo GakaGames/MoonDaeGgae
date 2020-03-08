@@ -129,9 +129,18 @@ module.exports = function(grunt) {
           dest: 'build/js/resources.js',
           varname: 'game.resources',
         },
-        files: [{
+        files: [
+        { name: "texture",         type: "json",   src: "data/img/texture.json" },
+        { name: "texture",         type: "image",  src: "data/img/texture.png" },
+        {
           src: ['data/bgm/**/*', 'data/sfx/**/*'],
           type: 'audio'
+        },{
+          src: ['data/fnt/*.png'],
+          type: 'image'
+        },{
+          src: ['data/fnt/*.fnt'],
+          type: 'binary'
         },{
           src: ['data/img/**/*.png'],
           type: 'image'
