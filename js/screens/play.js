@@ -28,6 +28,40 @@ game.PlayScreen = me.Stage.extend({
 
         this.moon = me.pool.pull("mainPlayer");
         me.game.world.addChild(this.moon, 2);
+
+        var Button = me.GUI_Object.extend({
+            init: function(x, y, img, key) {
+                var settings = {
+                    image: img,
+                    framewidth: 80,
+                    frameheight: 80
+                }
+                this._super(me.GUI_Object, "init", [x, y, settings]);
+                this.pos.z = 4;
+                this.pressed = false;
+                this.key = key
+            },
+
+            onClick: function(event) {
+                me.input.triggerKeyEvent(this.key, true);
+                this.pressed = true;
+                return true;
+            },
+
+            update: function(dt) {
+                if (this.pressed) {
+                    me.input.triggerKeyEvent(this.key, false);
+                    this.pressed = false;
+                }
+            }
+        });
+
+        me.game.world.addChild(new Button(40, 40, "button_q", me.input.KEY.Q));
+        me.game.world.addChild(new Button(40, 240, "button_w", me.input.KEY.W));
+        me.game.world.addChild(new Button(40, 480 - 40, "button_e", me.input.KEY.E));
+        me.game.world.addChild(new Button(640 - 40, 40, "button_1", me.input.KEY.NUM1));
+        me.game.world.addChild(new Button(640 - 40, 240, "button_2", me.input.KEY.NUM2));
+        me.game.world.addChild(new Button(640 - 40, 480 - 40, "button_3", me.input.KEY.NUM3));
     },
 
     /**
