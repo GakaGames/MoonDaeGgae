@@ -15,19 +15,31 @@ game.PlayerEntity = me.Entity.extend({
 
         // set a renderable
         this.renderable = game.texture.createAnimationFromName([
-            "pun1", "pun2", "pun3",
-            "pun4", "pun5"
+            "punch1", "punch2", "punch3", "punch4", "punch5",
+            "hammer1", "hammer2"
         ]);
 
         // define animations
         this.renderable.addAnimation("stand", [0]);
-        // this.renderable.addAnimation("punch_stomach", [0, 1, 2, 3, 4], 50);
+        this.next_anim = "stand";
+
         this.renderable.addAnimation("punch_stomach", [
-            { name: "pun1", delay: 50 },
-            { name: "pun2", delay: 50 },
-            { name: "pun3", delay: 50 },
-            { name: "pun4", delay: 50 },
-            { name: "pun5", delay: Infinity }
+            { name: "punch1", delay: 50 },
+            { name: "punch2", delay: 50 },
+            { name: "punch3", delay: 50 },
+            { name: "punch4", delay: 50 },
+            { name: "punch5", delay: Infinity }
+        ]);
+        this.renderable.addAnimation("punch_stomach_end", [
+            { name: "punch1", delay: Infinity }
+        ]);
+
+        this.renderable.addAnimation("hammer", [
+            { name: "hammer1", delay: 150 },
+            { name: "hammer2", delay: Infinity }
+        ]);
+        this.renderable.addAnimation("hammer_end", [
+            { name: "hammer2", delay: Infinity }
         ]);
 
         // define a standing animation (using the first frame)
@@ -49,6 +61,11 @@ game.PlayerEntity = me.Entity.extend({
         this.counter = 0;
     },
 
+    random_sound: function(prefix, cnt) {
+        var fname = prefix + me.Math.random(0, cnt);
+        me.audio.play(fname);
+    },
+
     /**
      * update the entity
      */
@@ -57,12 +74,14 @@ game.PlayerEntity = me.Entity.extend({
             if (me.input.isKeyPressed("q")) {
                 me.audio.play("argh");
                 this.renderable.setCurrentAnimation("punch_stomach");
+                this.next_anim = "punch_stomach_end";
                 this.counter = 20;
             }
             else if (me.input.isKeyPressed("w")) {
-                me.audio.play("argh");
-                this.renderable.setCurrentAnimation("punch_stomach");
-                this.counter = 20;
+                this.random_sound("hammer_", 2);
+                this.renderable.setCurrentAnimation("hammer");
+                this.next_anim = "hammer_end";
+                this.counter = 15;
             }
             //else {
             //    this.renderable.setCurrentAnimation("punch_stomach");
@@ -72,7 +91,7 @@ game.PlayerEntity = me.Entity.extend({
         if (this.counter > 0) {
             this.counter--;
             if (this.counter == 0) { // Just became 0.
-                this.renderable.setCurrentAnimation("stand");
+                this.renderable.setCurrentAnimation(this.next_anim);
             }
         }
 

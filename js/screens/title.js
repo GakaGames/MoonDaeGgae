@@ -5,7 +5,7 @@ game.TitleScreen = me.Stage.extend({
     onResetEvent: function() {
         // title screen
         var backgroundImage = new me.Sprite(0, 0, {
-                image: me.loader.getImage('title_screen'),
+                image: me.loader.getImage('moonrona'),
             }
         );
         this.backgroundImage = backgroundImage;
@@ -60,6 +60,12 @@ game.TitleScreen = me.Stage.extend({
 
         // change to play state on press Enter or click/tap
         me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+        me.input.bindKey(me.input.KEY.Q, "enter", true);
+        me.input.bindKey(me.input.KEY.W, "enter", true);
+        me.input.bindKey(me.input.KEY.E, "enter", true);
+        me.input.bindKey(me.input.KEY.A, "enter", true);
+        me.input.bindKey(me.input.KEY.S, "enter", true);
+        me.input.bindKey(me.input.KEY.D, "enter", true);
         me.input.bindPointer(me.input.pointer.LEFT, me.input.KEY.ENTER);
         this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
             if (action === "enter") {

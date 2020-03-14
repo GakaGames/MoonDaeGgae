@@ -11,7 +11,7 @@ game.PlayScreen = me.Stage.extend({
 
         // Background
         var backgroundImage = new me.Sprite(0, 0, {
-                image: me.loader.getImage('moonrona'),
+                image: me.loader.getImage('coronabomb'),
             }
         );
 
