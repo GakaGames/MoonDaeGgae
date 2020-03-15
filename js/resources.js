@@ -26,6 +26,7 @@ game.resources = [
     { "name": "button_1", "type": "image", "src": "data/img/gui/button_1.png" },
     { "name": "button_2", "type": "image", "src": "data/img/gui/button_2.png" },
     { "name": "button_3", "type": "image", "src": "data/img/gui/button_3.png" },
+    { "name": "fullsc", "type": "image", "src": "data/img/gui/fullsc.png" },
 
     {
         "name": "texture",

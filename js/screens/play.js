@@ -58,6 +58,27 @@ game.PlayScreen = me.Stage.extend({
             }
         });
 
+        var FullScreenButton = me.GUI_Object.extend({
+            init: function(x, y, img) {
+                var settings = {
+                    image: img,
+                    framewidth: 80,
+                    frameheight: 80
+                }
+                this._super(me.GUI_Object, "init", [x, y, settings]);
+                this.pos.z = 4;
+            },
+
+            onClick: function(event) {
+                if (!me.device.isFullscreen) {
+                    me.device.requestFullscreen();
+                } else {
+                    me.device.exitFullscreen();
+                }
+                return true;
+            }
+        });
+
         var x1 = 40;
         var x2 = 600;
         var y1 = 140;
@@ -69,6 +90,7 @@ game.PlayScreen = me.Stage.extend({
         me.game.world.addChild(new Button(x2, y1, "button_1", me.input.KEY.NUM1));
         me.game.world.addChild(new Button(x2, y2, "button_2", me.input.KEY.NUM2));
         me.game.world.addChild(new Button(x2, y3, "button_3", me.input.KEY.NUM3));
+        me.game.world.addChild(new FullScreenButton(600, 440, "fullsc"));
     },
 
     /**
