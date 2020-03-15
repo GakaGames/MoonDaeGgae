@@ -31,6 +31,7 @@ game.TitleScreen = me.Stage.extend({
                     font: "PressStart2P",
                     textAlign: "center"
                 });
+                this.tint = new me.Color(255, 200, 0);
 
                 this.counter = 0;
             },
@@ -51,7 +52,7 @@ game.TitleScreen = me.Stage.extend({
 
             draw : function (renderer) {
                 this.font.draw(renderer,
-                    "TAP OR PRESS ENTER TO START\n\nMOON-DAE-GGAE\n\nv1.0",
+                    "TAP OR PRESS ENTER TO START\n\n\nMOON-DAE-GGAE\n\nv1.0",
                     me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
             },
             onDestroyEvent : function () {

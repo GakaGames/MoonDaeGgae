@@ -154,30 +154,35 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("punch_stomach");
                 this.next_anim = "punch_stomach_end";
                 this.counter = 20;
+                game.data.score++;
             }
             else if (me.input.isKeyPressed("w")) {
                 this.random_sound("hammer_", 2);
                 this.renderable.setCurrentAnimation("hammer");
                 this.next_anim = "hammer_end";
                 this.counter = 15;
+                game.data.score++;
             }
             else if (me.input.isKeyPressed("e")) {
                 me.audio.play("ironbat");
                 this.renderable.setCurrentAnimation("dori");
                 this.next_anim = "dori_end";
                 this.counter = 21;
+                game.data.score++;
             }
             else if (me.input.isKeyPressed("1")) {
                 me.audio.play("bond");
                 this.renderable.setCurrentAnimation("sledge");
                 this.next_anim = "sledge_end";
                 this.counter = 15;
+                game.data.score++;
             }
             else if (me.input.isKeyPressed("2")) {
                 me.audio.play("slap");
                 this.renderable.setCurrentAnimation("kim");
                 this.next_anim = "kim_end";
                 this.counter = 21;
+                game.data.score++;
             }
             else if (me.input.isKeyPressed("3")) {
                 me.audio.play("ddok");
@@ -185,6 +190,7 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("kick2");
                 this.next_anim = "kick2_end";
                 this.counter = 28;
+                game.data.score++;
             }
             //else {
             //    this.renderable.setCurrentAnimation("punch_stomach");

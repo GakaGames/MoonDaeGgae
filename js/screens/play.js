@@ -23,8 +23,8 @@ game.PlayScreen = me.Stage.extend({
 
         // Add our HUD to the game world, add it last so that this is on top of the rest.
         // Can also be forced by specifying a "Infinity" z value to the addChild function.
-        //this.HUD = new game.HUD.Container();
-        //me.game.world.addChild(this.HUD);
+        this.HUD = new game.HUD.Container();
+        me.game.world.addChild(this.HUD, 2);
 
         this.moon = me.pool.pull("mainPlayer");
         me.game.world.addChild(this.moon, 2);
