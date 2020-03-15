@@ -7,7 +7,7 @@ game.PlayScreen = me.Stage.extend({
         game.data.score = 0;
 
         // BGM
-        me.audio.playTrack("moonminem");
+        me.audio.playTrack("fighting");
 
         // Background
         var backgroundImage = new me.Sprite(0, 0, {

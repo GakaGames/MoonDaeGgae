@@ -17,15 +17,13 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable = game.texture.createAnimationFromName([
             "punch1", "punch2", "punch3", "punch4", "punch5",
             "hammer1", "hammer2",
+            "sledge1", "sledge2",
             "dori01", "dori02", "dori03", "dori04", "dori05",
             "dori06", "dori07",
             "kim1", "kim2", "kim3", "kim4", "kim5",
             "kim6", "kim7", "kim8",
-            "exp1", "exp2", "exp3", "exp4", "exp5",
-            "exp6", "exp7",
-            "kyo1", "kyo2", "kyo3", "kyo4", "kyo5",
-            "kyo1", "kyo2", "kyo3", "kyo4", "kyo5",
-            "kyo6", "kyo7",
+            "kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5",
+            "kick2_6", "kick2_7", "kick2_8", "kick2_9",
             "blank"
         ]);
 
@@ -52,6 +50,14 @@ game.PlayerEntity = me.Entity.extend({
             { name: "hammer2", delay: Infinity }
         ]);
 
+        this.renderable.addAnimation("sledge", [
+            { name: "sledge1", delay: 150 },
+            { name: "sledge2", delay: Infinity }
+        ]);
+        this.renderable.addAnimation("sledge_end", [
+            { name: "sledge1", delay: Infinity }
+        ]);
+ 
         this.renderable.addAnimation("dori", [
             { name: "dori01", delay: 30 },
             { name: "dori02", delay: 30 },
@@ -65,17 +71,16 @@ game.PlayerEntity = me.Entity.extend({
             { name: "dori01", delay: Infinity }
         ]);
 
-        this.renderable.addAnimation("kyo", [
-            { name: "kyo1", delay: 30 },
-            { name: "kyo2", delay: 30 },
-            { name: "kyo3", delay: 30 },
-            { name: "kyo4", delay: 30 },
-            { name: "kyo5", delay: 30 },
-            { name: "kyo6", delay: 30 },
-            { name: "kyo7", delay: Infinity }
+        this.renderable.addAnimation("head", [
+            { name: "head1", delay: 30 },
+            { name: "head2", delay: 30 },
+            { name: "head3", delay: 30 },
+            { name: "head4", delay: 30 },
+            { name: "head5", delay: 30 },
+            { name: "head6", delay: Infinity }
         ]);
-        this.renderable.addAnimation("kyo_end", [
-            { name: "kyo1", delay: Infinity }
+        this.renderable.addAnimation("head_end", [
+            { name: "head1", delay: Infinity }
         ]);
 
         this.renderable.addAnimation("kim", [
@@ -92,20 +97,20 @@ game.PlayerEntity = me.Entity.extend({
             { name: "kim1", delay: Infinity }
         ]);
 
-        this.renderable.addAnimation("exp", [
-            { name: "exp1", delay: 30 },
-            { name: "exp1", delay: 30 },
-            { name: "exp1", delay: 30 },
-            { name: "exp2", delay: 30 },
-            { name: "exp3", delay: 30 },
-            { name: "exp4", delay: 30 },
-            { name: "exp5", delay: 30 },
-            { name: "exp6", delay: 30 },
-            { name: "exp7", delay: Infinity }
+        this.renderable.addAnimation("kick2", [
+            { name: "kick2_1", delay: 30 },
+            { name: "kick2_2", delay: 30 },
+            { name: "kick2_3", delay: 30 },
+            { name: "kick2_4", delay: 30 },
+            { name: "kick2_5", delay: 30 },
+            { name: "kick2_6", delay: 30 },
+            { name: "kick2_7", delay: 50 },
+            { name: "kick2_8", delay: 50 },
+            { name: "kick2_9", delay: Infinity },
         ]);
 
-        this.renderable.addAnimation("blank", [
-            { name: "blank", delay: Infinity }
+        this.renderable.addAnimation("kick2_end", [
+            { name: "kick2_1", delay: Infinity }
         ]);
 
         // define a standing animation (using the first frame)
@@ -163,9 +168,9 @@ game.PlayerEntity = me.Entity.extend({
                 this.counter = 21;
             }
             else if (me.input.isKeyPressed("1")) {
-                me.audio.play("punch_1");
-                this.renderable.setCurrentAnimation("kyo");
-                this.next_anim = "kyo_end";
+                me.audio.play("bond");
+                this.renderable.setCurrentAnimation("sledge");
+                this.next_anim = "sledge_end";
                 this.counter = 15;
             }
             else if (me.input.isKeyPressed("2")) {
@@ -175,10 +180,11 @@ game.PlayerEntity = me.Entity.extend({
                 this.counter = 21;
             }
             else if (me.input.isKeyPressed("3")) {
-                this.random_sound("exp_", 2);
-                this.renderable.setCurrentAnimation("exp");
-                this.next_anim = "blank";
-                this.counter = 15;
+                me.audio.play("ddok");
+                me.audio.play("punch_1");
+                this.renderable.setCurrentAnimation("kick2");
+                this.next_anim = "kick2_end";
+                this.counter = 28;
             }
             //else {
             //    this.renderable.setCurrentAnimation("punch_stomach");

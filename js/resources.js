@@ -1,11 +1,6 @@
 game.resources = [
     {
-        "name": "moonminem",
-        "type": "audio",
-        "src": "data/bgm/"
-    },
-    {
-        "name": "red_sun_in_the_sky",
+        "name": "fighting",
         "type": "audio",
         "src": "data/bgm/"
     },
@@ -16,8 +11,8 @@ game.resources = [
     { "name": "dingdong", "type": "audio", "src": "data/sfx/" },
     { "name": "ironbat", "type": "audio", "src": "data/sfx/" },
     { "name": "slap", "type": "audio", "src": "data/sfx/" },
-    { "name": "exp_0", "type": "audio", "src": "data/sfx/" },
-    { "name": "exp_1", "type": "audio", "src": "data/sfx/" },
+    { "name": "ddok", "type": "audio", "src": "data/sfx/" },
+    { "name": "bond", "type": "audio", "src": "data/sfx/" },
 
     { "name": "PressStart2P", "type": "image", "src": "data/fnt/PressStart2P.png" },
     { "name": "PressStart2P", "type": "binary", "src": "data/fnt/PressStart2P.fnt" },
@@ -35,11 +30,11 @@ game.resources = [
     {
         "name": "texture",
         "type": "json",
-        "src": "data/img/texture.json"
+        "src": "data/img/texture0.json"
     },
     {
         "name": "texture",
         "type": "image",
-        "src": "data/img/texture.png"
+        "src": "data/img/texture0.png"
     },
 ];

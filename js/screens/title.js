@@ -11,7 +11,7 @@ game.TitleScreen = me.Stage.extend({
         this.backgroundImage = backgroundImage;
 
         // BGM
-        me.audio.playTrack("red_sun_in_the_sky");
+        // me.audio.playTrack("red_sun_in_the_sky");
 
         // position and scale to fit with the viewport size
         backgroundImage.anchorPoint.set(0, 0);
