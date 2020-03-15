@@ -21,13 +21,13 @@ game.TitleScreen = me.Stage.extend({
         me.game.world.addChild(backgroundImage, 1);
 
         // add a new renderable component with the scrolling text
-        this.txt = new (me.Renderable.extend ({
+        var txt = me.Renderable.extend ({
             // constructor
             init : function (x, y) {
-                this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
+                this._super(me.Renderable, 'init', [x, y, me.game.viewport.width, me.game.viewport.height]);
 
                 // font for the scrolling text
-                this.font = new me.BitmapText(0, 0, {
+                this.font = new me.BitmapText(x, y, {
                     font: "PressStart2P",
                     textAlign: "center"
                 });
@@ -58,8 +58,12 @@ game.TitleScreen = me.Stage.extend({
             onDestroyEvent : function () {
                 ;
             }
-        }));
-        me.game.world.addChild(this.txt, 2);
+        });
+        this.txt = new txt(0, 0);
+        this.txt_shadow = new txt(1, 1);
+        this.txt_shadow.tint = new me.Color(0, 0, 0);
+        me.game.world.addChild(this.txt_shadow, 2);
+        me.game.world.addChild(this.txt, 3);
 
         // change to play state on press Enter or click/tap
         me.input.bindKey(me.input.KEY.ENTER, "enter", true);
