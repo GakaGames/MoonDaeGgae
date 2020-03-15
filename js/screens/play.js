@@ -38,30 +38,37 @@ game.PlayScreen = me.Stage.extend({
                 }
                 this._super(me.GUI_Object, "init", [x, y, settings]);
                 this.pos.z = 4;
-                this.pressed = false;
-                this.key = key
+                this.isClickable = true;
+                this.isHoldable = true;
+
+                this.key = key;
             },
 
             onClick: function(event) {
                 me.input.triggerKeyEvent(this.key, true);
-                this.pressed = true;
                 return true;
             },
 
-            update: function(dt) {
-                if (this.pressed) {
-                    me.input.triggerKeyEvent(this.key, false);
-                    this.pressed = false;
-                }
+            onHold: function() {
+                me.input.triggerKeyEvent(this.key, true);
+            },
+
+            onRelease: function() {
+                me.input.triggerKeyEvent(this.key, false);
             }
         });
 
-        me.game.world.addChild(new Button(40, 40, "button_q", me.input.KEY.Q));
-        me.game.world.addChild(new Button(40, 240, "button_w", me.input.KEY.W));
-        me.game.world.addChild(new Button(40, 480 - 40, "button_e", me.input.KEY.E));
-        me.game.world.addChild(new Button(640 - 40, 40, "button_1", me.input.KEY.NUM1));
-        me.game.world.addChild(new Button(640 - 40, 240, "button_2", me.input.KEY.NUM2));
-        me.game.world.addChild(new Button(640 - 40, 480 - 40, "button_3", me.input.KEY.NUM3));
+        var x1 = 40;
+        var x2 = 600;
+        var y1 = 140;
+        var y2 = 240;
+        var y3 = 340;
+        me.game.world.addChild(new Button(x1, y1, "button_q", me.input.KEY.Q));
+        me.game.world.addChild(new Button(x1, y2, "button_w", me.input.KEY.W));
+        me.game.world.addChild(new Button(x1, y3, "button_e", me.input.KEY.E));
+        me.game.world.addChild(new Button(x2, y1, "button_1", me.input.KEY.NUM1));
+        me.game.world.addChild(new Button(x2, y2, "button_2", me.input.KEY.NUM2));
+        me.game.world.addChild(new Button(x2, y3, "button_3", me.input.KEY.NUM3));
     },
 
     /**
