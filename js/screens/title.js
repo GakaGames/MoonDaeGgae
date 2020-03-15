@@ -50,7 +50,9 @@ game.TitleScreen = me.Stage.extend({
             },
 
             draw : function (renderer) {
-                this.font.draw(renderer, "TAP OR PRESS ENTER TO START", me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
+                this.font.draw(renderer,
+                    "TAP OR PRESS ENTER TO START\n\nMOON-DAE-GGAE\n\nv1.0",
+                    me.game.viewport.width + this.pos.x, me.game.viewport.height + this.pos.y);
             },
             onDestroyEvent : function () {
                 ;
