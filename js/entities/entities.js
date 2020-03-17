@@ -140,13 +140,13 @@ game.PlayerEntity = me.Entity.extend({
             }
         }
         else {
-            if (this.prev_skill != sk) {
-                game.data.gattling = 0;
-            }
-            else {
+            //if (this.prev_skill != sk) {
+            //    game.data.gattling = 0;
+            //}
+            //else {
                 if (game.data.gattling < game.data.gattling_max)
                     game.data.gattling++;
-            }
+            //}
             this.prev_skill = sk;
         }
 
