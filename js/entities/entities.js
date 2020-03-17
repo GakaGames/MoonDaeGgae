@@ -13,116 +13,70 @@ game.PlayerEntity = me.Entity.extend({
             height: 0
         }]);
 
-        // set a renderable
-        this.renderable = game.texture.createAnimationFromName([
-            "punch1", "punch2", "punch3", "punch4", "punch5",
-            "hammer1", "hammer2",
-            "sledge1", "sledge2",
-            "dori01", "dori02", "dori03", "dori04", "dori05",
-            "dori06", "dori07",
-            "kim1", "kim2", "kim3", "kim4", "kim5",
-            "kim6", "kim7", "kim8",
-            "kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5",
-            "kick2_6", "kick2_7", "kick2_8", "kick2_9",
-            "blank"
-        ]);
+        // Prepare skillsets
+        // rof: delay per frame, in ms.
+        this.skills = [
+            {
+                anim: [ "punch1", "punch2", "punch3", "punch4", "punch5" ],
+                aud_func: function(self, stack_cnt) {
+                    me.audio.play("punch_1");
+                },
+                rofs: [50, 37, 25]
+            },
+            {
+                anim: ["hammer1", "hammer2"],
+                aud_func: function(self, stack_cnt) {
+                    self.play_random_sound("hammer_", 2);
+                },
+                rofs: [150, 112, 75]
+            },
+            {
+                anim: ["dori01", "dori02", "dori03", "dori04", "dori05", "dori06", "dori07"],
+                aud_func: function(self, stack_cnt) {
+                    me.audio.play("ironbat");
+                },
+                rofs: [30, 22, 15]
+            },
+            {
+                anim: ["sledge1", "sledge2"],
+                aud_func: function(self, stack_cnt) {
+                    me.audio.play("bond");
+                },
+                rofs: [150, 112, 75]
+            },
+            {
+                anim: ["kim1", "kim2", "kim3", "kim4", "kim5", "kim6", "kim7", "kim8"],
+                aud_func: function(self, stack_cnt) {
+                    me.audio.play("slap");
+                },
+                rofs: [30, 22, 15]
+            },
+            {
+                anim: ["kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5", "kick2_6", "kick2_7", "kick2_8", "kick2_9"],
+                aud_func: function(self, stack_cnt) {
+                    me.audio.play("ddok");
+                    me.audio.play("punch_1");
+                },
+                rofs: [30, 22, 15]
+            }
+        ];
 
-        // define animations
-        this.renderable.addAnimation("stand", [0]);
-        this.next_anim = "stand";
+        // Create animations from skills and set a renderable
+        var all_frames = ["blank"];
+        for (var i = 0 ; i < this.skills.length ; i++ ) {
+            all_frames = all_frames.concat(this.skills[i].anim);
+        }
+        this.renderable = game.texture.createAnimationFromName(all_frames);
 
-        this.renderable.addAnimation("punch_stomach", [
-            { name: "punch1", delay: 50 },
-            { name: "punch2", delay: 50 },
-            { name: "punch3", delay: 50 },
-            { name: "punch4", delay: 50 },
-            { name: "punch5", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("punch_stomach_end", [
-            { name: "punch1", delay: Infinity }
-        ]);
+         // define animations
+        this.renderable.addAnimation("stand", [{ name: "punch1", delay: Infinity }]);
+        for (var i = 0 ; i < this.skills.length ; i++ ) {
+            this.add_anims(this.skills[i]);
+        }
 
-        this.renderable.addAnimation("hammer", [
-            { name: "hammer1", delay: 150 },
-            { name: "hammer2", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("hammer_end", [
-            { name: "hammer2", delay: Infinity }
-        ]);
-
-        this.renderable.addAnimation("sledge", [
-            { name: "sledge1", delay: 150 },
-            { name: "sledge2", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("sledge_end", [
-            { name: "sledge1", delay: Infinity }
-        ]);
- 
-        this.renderable.addAnimation("dori", [
-            { name: "dori01", delay: 30 },
-            { name: "dori02", delay: 30 },
-            { name: "dori03", delay: 30 },
-            { name: "dori04", delay: 30 },
-            { name: "dori05", delay: 30 },
-            { name: "dori06", delay: 30 },
-            { name: "dori07", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("dori_end", [
-            { name: "dori01", delay: Infinity }
-        ]);
-
-        this.renderable.addAnimation("head", [
-            { name: "head1", delay: 30 },
-            { name: "head2", delay: 30 },
-            { name: "head3", delay: 30 },
-            { name: "head4", delay: 30 },
-            { name: "head5", delay: 30 },
-            { name: "head6", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("head_end", [
-            { name: "head1", delay: Infinity }
-        ]);
-
-        this.renderable.addAnimation("kim", [
-            { name: "kim1", delay: 30 },
-            { name: "kim2", delay: 30 },
-            { name: "kim3", delay: 30 },
-            { name: "kim4", delay: 30 },
-            { name: "kim5", delay: 30 },
-            { name: "kim6", delay: 30 },
-            { name: "kim7", delay: 30 },
-            { name: "kim8", delay: Infinity }
-        ]);
-        this.renderable.addAnimation("kim_end", [
-            { name: "kim1", delay: Infinity }
-        ]);
-
-        this.renderable.addAnimation("kick2", [
-            { name: "kick2_1", delay: 30 },
-            { name: "kick2_2", delay: 30 },
-            { name: "kick2_3", delay: 30 },
-            { name: "kick2_4", delay: 30 },
-            { name: "kick2_5", delay: 30 },
-            { name: "kick2_6", delay: 30 },
-            { name: "kick2_7", delay: 50 },
-            { name: "kick2_8", delay: 50 },
-            { name: "kick2_9", delay: Infinity },
-        ]);
-
-        this.renderable.addAnimation("kick2_end", [
-            { name: "kick2_1", delay: Infinity }
-        ]);
-
-        // define a standing animation (using the first frame)
-        //this.renderable.addAnimation("stand", [0]);
-
-        // define punch in the pit of the stomach
-        // this.renderable.addAnimation("puch_stomach", [0, 1, 2, 3, 4]);
-
-        // initial state
-        this.renderable.setCurrentAnimation("stand");
-
+        // Properties
         this.anchorPoint.set(0.5, 1.0);
+        this.alwaysUpdate = true;
 
         // Key bindings
         me.input.bindKey(me.input.KEY.Q, "q");
@@ -135,83 +89,83 @@ game.PlayerEntity = me.Entity.extend({
         me.input.bindKey(me.input.KEY.O, "2");
         me.input.bindKey(me.input.KEY.P, "3");
 
-        this.alwaysUpdate = true;
-        this.counter = 0;
+        // initial state
+        this.renderable.setCurrentAnimation("stand");
+        this.next_anim = "stand";
+
+        this.is_anim_playing = false;
+        this.prev_skill = -1;
+        this.gattling_count = 0;
+        this.gattling_stack = 0;
     },
 
-    random_sound: function(prefix, cnt) {
+    play_random_sound: function(prefix, cnt) {
         var fname = prefix + me.Math.random(0, cnt);
         me.audio.play(fname);
+    },
+
+    add_anims: function(skill) {
+        for (var st = 0 ; st < 3 ; st++ ) {
+            var stack_name = skill.anim + st;
+            var anims = []
+            for (var i = 0 ; i < skill.anim.length ; i++ ) {
+                anims.push({
+                    name: skill.anim[i],
+                    delay: skill.rofs[st]
+                });
+            }
+            this.renderable.addAnimation(stack_name, anims);
+        }
+        this.renderable.addAnimation(skill.anim + "_end", [
+            { name: skill.anim[0], delay: Infinity }
+        ]);
     },
 
     /**
      * update the entity
      */
     update : function (dt) {
-        if (this.counter <= 0) {
-            if (me.input.isKeyPressed("q")) {
-                me.audio.play("punch_1");
-                this.renderable.setCurrentAnimation("punch_stomach");
-                this.next_anim = "punch_stomach_end";
-                this.counter = 20;
-                game.data.score++;
-            }
-            else if (me.input.isKeyPressed("w")) {
-                this.random_sound("hammer_", 2);
-                this.renderable.setCurrentAnimation("hammer");
-                this.next_anim = "hammer_end";
-                this.counter = 15;
-                game.data.score++;
-            }
-            else if (me.input.isKeyPressed("e")) {
-                me.audio.play("ironbat");
-                this.renderable.setCurrentAnimation("dori");
-                this.next_anim = "dori_end";
-                this.counter = 21;
-                game.data.score++;
-            }
-            else if (me.input.isKeyPressed("1")) {
-                me.audio.play("bond");
-                this.renderable.setCurrentAnimation("sledge");
-                this.next_anim = "sledge_end";
-                this.counter = 15;
-                game.data.score++;
-            }
-            else if (me.input.isKeyPressed("2")) {
-                me.audio.play("slap");
-                this.renderable.setCurrentAnimation("kim");
-                this.next_anim = "kim_end";
-                this.counter = 21;
-                game.data.score++;
-            }
-            else if (me.input.isKeyPressed("3")) {
-                me.audio.play("ddok");
-                me.audio.play("punch_1");
-                this.renderable.setCurrentAnimation("kick2");
-                this.next_anim = "kick2_end";
-                this.counter = 28;
-                game.data.score++;
-            }
-            //else {
-            //    this.renderable.setCurrentAnimation("punch_stomach");
-            //}
-        }
+        if (!this.is_anim_playing) {
+            var sk = -1;
+            if (me.input.isKeyPressed("q")) { sk = 0; }
+            else if (me.input.isKeyPressed("w")) { sk = 1; }
+            else if (me.input.isKeyPressed("e")) { sk = 2; }
+            else if (me.input.isKeyPressed("1")) { sk = 3; }
+            else if (me.input.isKeyPressed("2")) { sk = 4; }
+            else if (me.input.isKeyPressed("3")) { sk = 5; }
 
-        if (this.counter > 0) {
-            this.counter--;
-            if (this.counter == 0) { // Just became 0.
-                this.renderable.setCurrentAnimation(this.next_anim);
+            if (sk >= 0) {
+                var skill = this.skills[sk];
+                this.is_anim_playing = true;
+                skill.aud_func(this, this.gattling_stack);
+                this.renderable.setCurrentAnimation(
+                    skill.anim + this.gattling_stack,
+                    (function() {
+                        console.log(this);
+                        this.is_anim_playing = false;
+                        this.renderable.setCurrentAnimation(this.next_anim);
+                        return false;
+                    }).bind(this)
+                );
+                this.next_anim = skill.anim + "_end";
+                this.counter = Math.floor(skill.rofs[this.gattling_stack] * skill.anim.length / 10);
+                this.prev_skill = sk;
+
+                game.data.score++;
+
+                if (this.prev_skill == skill) {
+                    this.gattling_count++;
+                    if (this.gattling_count >= 10) {
+                        this.gattling_stack++;
+                        this.gattling_count = 0;
+                    }
+                }
+                else {
+                    this.gattling_stack = 0;
+                    this.gattling_count = 0;
+                }
             }
         }
-
-        // apply physics to the body (this moves the entity)
-        // this.body.update(dt);
-
-        // handle collisions against other shapes
-        // me.collision.check(this);
-
-        // return true if we moved or if the renderable was updated
-        //return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
         return this._super(me.Entity, 'update', [dt]);
     },
 
