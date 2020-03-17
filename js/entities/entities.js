@@ -21,10 +21,10 @@ game.PlayerEntity = me.Entity.extend({
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("punch_1");
                 },
-                rofs: [50, 37, 25]
+                rofs: [75, 56, 37]
             },
             {
-                anim: ["hammer1", "hammer2"],
+                anim: ["hammer2", "hammer1"],
                 aud_func: function(self, stack_cnt) {
                     self.play_random_sound("hammer_", 2);
                 },
@@ -35,7 +35,7 @@ game.PlayerEntity = me.Entity.extend({
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("ironbat");
                 },
-                rofs: [30, 22, 15]
+                rofs: [60, 45, 30]
             },
             {
                 anim: ["sledge1", "sledge2"],
@@ -49,15 +49,15 @@ game.PlayerEntity = me.Entity.extend({
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("slap");
                 },
-                rofs: [30, 22, 15]
+                rofs: [50, 37, 25]
             },
             {
-                anim: ["kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5", "kick2_6", "kick2_7", "kick2_8", "kick2_9"],
+                anim: ["kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5", "kick2_6", "kick2_7", "kick2_8", "kick2_9", "kick2_9"],
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("ddok");
                     me.audio.play("punch_1");
                 },
-                rofs: [30, 22, 15]
+                rofs: [60, 45, 30]
             }
         ];
 
