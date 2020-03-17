@@ -95,8 +95,6 @@ game.PlayerEntity = me.Entity.extend({
 
         this.is_anim_playing = false;
         this.prev_skill = -1;
-        this.gattling_count = 0;
-        this.gattling_stack = 0;
     },
 
     play_random_sound: function(prefix, cnt) {
@@ -125,47 +123,56 @@ game.PlayerEntity = me.Entity.extend({
      * update the entity
      */
     update : function (dt) {
-        if (!this.is_anim_playing) {
-            var sk = -1;
-            if (me.input.isKeyPressed("q")) { sk = 0; }
-            else if (me.input.isKeyPressed("w")) { sk = 1; }
-            else if (me.input.isKeyPressed("e")) { sk = 2; }
-            else if (me.input.isKeyPressed("1")) { sk = 3; }
-            else if (me.input.isKeyPressed("2")) { sk = 4; }
-            else if (me.input.isKeyPressed("3")) { sk = 5; }
+        var sk = -1;
+        if (me.input.isKeyPressed("q")) { sk = 0; }
+        else if (me.input.isKeyPressed("w")) { sk = 1; }
+        else if (me.input.isKeyPressed("e")) { sk = 2; }
+        else if (me.input.isKeyPressed("1")) { sk = 3; }
+        else if (me.input.isKeyPressed("2")) { sk = 4; }
+        else if (me.input.isKeyPressed("3")) { sk = 5; }
 
-            if (sk >= 0) {
-                var skill = this.skills[sk];
-                this.is_anim_playing = true;
-                skill.aud_func(this, this.gattling_stack);
-                this.renderable.setCurrentAnimation(
-                    skill.anim + this.gattling_stack,
-                    (function() {
-                        console.log(this);
-                        this.is_anim_playing = false;
-                        this.renderable.setCurrentAnimation(this.next_anim);
-                        return false;
-                    }).bind(this)
-                );
-                this.next_anim = skill.anim + "_end";
-                this.counter = Math.floor(skill.rofs[this.gattling_stack] * skill.anim.length / 10);
-                this.prev_skill = sk;
-
-                game.data.score++;
-
-                if (this.prev_skill == skill) {
-                    this.gattling_count++;
-                    if (this.gattling_count >= 10) {
-                        this.gattling_stack++;
-                        this.gattling_count = 0;
-                    }
-                }
-                else {
-                    this.gattling_stack = 0;
-                    this.gattling_count = 0;
-                }
+        // Gattling stuff
+        if (sk == -1) { // no key press
+            if (game.data.gattling > 0) {
+                game.data.gattling -= 4;
+                if (game.data.gattling < 0)
+                    game.data.gattling = 0;
             }
         }
+        else {
+            if (this.prev_skill != sk) {
+                game.data.gattling = 0;
+            }
+            else {
+                if (game.data.gattling < game.data.gattling_max)
+                    game.data.gattling++;
+            }
+            this.prev_skill = sk;
+        }
+
+        // Skill stuff
+        if (sk >= 0 && (!this.is_anim_playing)) {
+            var skill = this.skills[sk];
+            var gattling_stack = 0;
+            if (game.data.gattling == game.data.gattling_max)
+                gattling_stack = 2;
+            else if (game.data.gattling >= game.data.gattling_mid)
+                gattling_stack = 1;
+
+            this.is_anim_playing = true;
+            this.next_anim = skill.anim + "_end";
+            skill.aud_func(this, gattling_stack);
+            this.renderable.setCurrentAnimation(
+                skill.anim + gattling_stack,
+                (function() {
+                    this.is_anim_playing = false;
+                    this.renderable.setCurrentAnimation(this.next_anim);
+                    game.data.score++;
+                    return false;
+                }).bind(this)
+            );
+        }
+
         return this._super(me.Entity, 'update', [dt]);
     },
 

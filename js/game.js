@@ -2,12 +2,12 @@
 /* Game namespace */
 var game = {
 
-    // an object where to store game information
     data : {
-        // score
-        score : 0
+        score : 0,
+        gattling : 0,
+        gattling_max: 60 * 10, // 10 seconds. 60fps.
+        gattling_mid: 60 * 5
     },
-
 
     // Run on page load.
     "onload" : function () {
