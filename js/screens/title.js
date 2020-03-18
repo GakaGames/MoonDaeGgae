@@ -78,7 +78,7 @@ game.TitleScreen = me.Stage.extend({
             if (action === "enter") {
                 // play something on tap / enter
                 // this will unlock audio on mobile devices
-                me.audio.play("dingdong");
+                me.audio.play("jjoint");
                 me.state.change(me.state.PLAY);
             }
         });

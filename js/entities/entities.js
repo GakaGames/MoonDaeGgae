@@ -18,6 +18,7 @@ game.PlayerEntity = me.Entity.extend({
         this.skills = [
             {
                 anim: [ "punch1", "punch2", "punch3", "punch4", "punch5" ],
+                is_anim_2d: false,
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("punch_1");
                 },
@@ -25,20 +26,28 @@ game.PlayerEntity = me.Entity.extend({
             },
             {
                 anim: ["hammer2", "hammer1"],
+                is_anim_2d: false,
                 aud_func: function(self, stack_cnt) {
-                    self.play_random_sound("hammer_", 2);
+                    self.play_random_sound(["hammer_0", "hammer_1"]);
                 },
                 rofs: [150, 112, 75]
             },
             {
-                anim: ["dori01", "dori02", "dori03", "dori04", "dori05", "dori06", "dori07"],
+                anim: [
+                    ["jjoint1", "jjoint2", "jjoint3"],
+                    ["jjoint4", "jjoint2", "jjoint3"],
+                    ["jjoint4", "jjoint2", "jjoint3"]
+                ],
+                is_anim_2d: true,
                 aud_func: function(self, stack_cnt) {
-                    me.audio.play("ironbat");
+                    self.play_random_sound(["kick_0", "punch_1"]);
+                    self.play_random_sound(["mb_daa", "mb_ya", "mb_maja"]);
                 },
-                rofs: [60, 45, 30]
+                rofs: [112, 84, 56]
             },
             {
                 anim: ["sledge1", "sledge2"],
+                is_anim_2d: false,
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("bond");
                 },
@@ -46,6 +55,7 @@ game.PlayerEntity = me.Entity.extend({
             },
             {
                 anim: ["kim1", "kim2", "kim3", "kim4", "kim5", "kim6", "kim7", "kim8"],
+                is_anim_2d: false,
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("slap");
                 },
@@ -53,6 +63,7 @@ game.PlayerEntity = me.Entity.extend({
             },
             {
                 anim: ["kick2_1", "kick2_2", "kick2_3", "kick2_4", "kick2_5", "kick2_6", "kick2_7", "kick2_8", "kick2_9", "kick2_9"],
+                is_anim_2d: false,
                 aud_func: function(self, stack_cnt) {
                     me.audio.play("ddok");
                     me.audio.play("punch_1");
@@ -64,7 +75,15 @@ game.PlayerEntity = me.Entity.extend({
         // Create animations from skills and set a renderable
         var all_frames = ["blank"];
         for (var i = 0 ; i < this.skills.length ; i++ ) {
-            all_frames = all_frames.concat(this.skills[i].anim);
+            var skill = this.skills[i];
+            if (!skill.is_anim_2d) {
+                all_frames = all_frames.concat(skill.anim);
+            }
+            else {
+                for (var j = 0 ; j < skill.anim.length ; j++) {
+                    all_frames = all_frames.concat(skill.anim[j]);
+                }
+            }
         }
         this.renderable = game.texture.createAnimationFromName(all_frames);
 
@@ -97,9 +116,9 @@ game.PlayerEntity = me.Entity.extend({
         this.prev_skill = -1;
     },
 
-    play_random_sound: function(prefix, cnt) {
-        var fname = prefix + me.Math.random(0, cnt);
-        me.audio.play(fname);
+    play_random_sound: function(sounds) {
+        var idx = me.Math.random(0, sounds.length);
+        me.audio.play(sounds[idx]);
     },
 
     add_anims: function(skill) {
@@ -107,16 +126,38 @@ game.PlayerEntity = me.Entity.extend({
             var stack_name = skill.anim + st;
             var anims = []
             for (var i = 0 ; i < skill.anim.length ; i++ ) {
-                anims.push({
-                    name: skill.anim[i],
-                    delay: skill.rofs[st]
-                });
+                if (skill.is_anim_2d) {
+                    anims.push({
+                        name: skill.anim[st][i],
+                        delay: skill.rofs[st]
+                    });
+                }
+                else {
+                    anims.push({
+                        name: skill.anim[i],
+                        delay: skill.rofs[st]
+                    });
+                }
             }
             this.renderable.addAnimation(stack_name, anims);
         }
-        this.renderable.addAnimation(skill.anim + "_end", [
-            { name: skill.anim[0], delay: Infinity }
-        ]);
+
+        if (!skill.is_anim_2d) {
+            this.renderable.addAnimation(skill.anim[0] + "_end", [
+                { name: skill.anim[0], delay: Infinity }
+            ]);
+        }
+        else {
+            this.renderable.addAnimation(skill.anim[0][0] + "_end", [
+                { name: skill.anim[0][0], delay: Infinity }
+            ]);
+            this.renderable.addAnimation(skill.anim[1][0] + "_end", [
+                { name: skill.anim[1][0], delay: Infinity }
+            ]);
+            this.renderable.addAnimation(skill.anim[2][0] + "_end", [
+                { name: skill.anim[2][0], delay: Infinity }
+            ]);
+        }
     },
 
     /**
@@ -160,7 +201,10 @@ game.PlayerEntity = me.Entity.extend({
                 gattling_stack = 1;
 
             this.is_anim_playing = true;
-            this.next_anim = skill.anim + "_end";
+            if (!skill.is_anim_2d)
+                this.next_anim = skill.anim[0] + "_end";
+            else
+                this.next_anim = skill.anim[gattling_stack][0] + "_end";
             skill.aud_func(this, gattling_stack);
             this.renderable.setCurrentAnimation(
                 skill.anim + gattling_stack,
