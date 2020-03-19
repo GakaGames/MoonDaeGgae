@@ -5,10 +5,12 @@ game.resources = [
         "src": "data/bgm/"
     },
 
+    { "name": "jjoint", "type": "audio", "src": "data/sfx/" },
+    { "name": "dingdong", "type": "audio", "src": "data/sfx/" },
+
     { "name": "punch_1", "type": "audio", "src": "data/sfx/" },
     { "name": "hammer_0", "type": "audio", "src": "data/sfx/" },
     { "name": "hammer_1", "type": "audio", "src": "data/sfx/" },
-    { "name": "jjoint", "type": "audio", "src": "data/sfx/" },
     { "name": "kick_0", "type": "audio", "src": "data/sfx/" },
     { "name": "slap", "type": "audio", "src": "data/sfx/" },
     { "name": "ddok", "type": "audio", "src": "data/sfx/" },
@@ -22,6 +24,8 @@ game.resources = [
 
     { "name": "moonrona", "type": "image", "src": "data/img/gui/moonrona.png" },
     { "name": "coronabomb", "type": "image", "src": "data/img/gui/coronabomb.png" },
+    { "name": "gakatv", "type": "image", "src": "data/img/gui/gakatv.png" },
+    { "name": "gaka_games", "type": "image", "src": "data/img/gui/gaka_games.png" },
 
     { "name": "button_q", "type": "image", "src": "data/img/gui/button_q.png" },
     { "name": "button_w", "type": "image", "src": "data/img/gui/button_w.png" },
@@ -30,6 +34,7 @@ game.resources = [
     { "name": "button_2", "type": "image", "src": "data/img/gui/button_2.png" },
     { "name": "button_3", "type": "image", "src": "data/img/gui/button_3.png" },
     { "name": "fullsc", "type": "image", "src": "data/img/gui/fullsc.png" },
+    { "name": "little_mb", "type": "image", "src": "data/img/gui/little_mb.png" },
 
     {
         "name": "texture",

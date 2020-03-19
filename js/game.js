@@ -27,6 +27,7 @@ var game = {
 
     // Run on game resources loaded.
     "loaded" : function () {
+        me.state.set(me.state.BRAND, new game.BrandScreen());
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
@@ -39,7 +40,6 @@ var game = {
         me.pool.register("mainPlayer", game.PlayerEntity);
  
         // Start the game.
-        me.state.change(me.state.MENU); // Commented out for debug
-        // me.state.change(me.state.PLAY);  // For faster debug
+        me.state.change(me.state.BRAND);
     }
 };

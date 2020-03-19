@@ -78,7 +78,7 @@ def main():
     plist2json("texture0.plist", "texture0.json")
     os.system("pngquant 256 < texture0.png > tmp.png")
     os.system("mv tmp.png texture0.png")
-    os.system("mv texture0.png texture0.json ../data/img/")
+    os.system("mv -v texture0.png texture0.json ../data/img/")
 
 
 if __name__ == "__main__":
