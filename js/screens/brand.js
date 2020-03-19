@@ -8,9 +8,10 @@ game.BrandScreen = me.Stage.extend({
         this.logo = new me.Sprite(320, 240, { image: me.loader.getImage('gakatv') });
         me.game.world.addChild(this.bg, 0);
         me.game.world.addChild(this.logo, 1);
-        me.audio.play("jjoint", false, function() {
+        me.audio.play("jjoint");
+        me.timer.setTimeout(function() {
             me.state.change(me.state.MENU);
-        });
+        }, 1985);
     },
 
     onDestroyEvent: function() {
