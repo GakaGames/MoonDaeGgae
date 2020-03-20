@@ -104,8 +104,8 @@ game.TitleScreen = me.Stage.extend({
         this.blinker = new game.TitleScreenDecorations(320, 305);
         me.game.world.addChild(this.blinker);
 
-        msg = "2020";
-        x -= 60;
+        msg = "2020 Myungtendo";
+        x = 10;
         y = 120;
         this.txt_2020 = new txt(x, y, msg);
         this.txt_2020.tint = new me.Color(255, 255, 255);
@@ -114,19 +114,12 @@ game.TitleScreen = me.Stage.extend({
         me.game.world.addChild(this.txt_2020_shadow, 2);
         me.game.world.addChild(this.txt_2020, 3);
 
-        this.mb = new me.Sprite(x + 320 - 63, y + 240 + 10, { image: me.loader.getImage('little_mb') });
-        x += 141;
-        this.gaka_games = new me.Sprite(x + 320, y + 240 + 10, { image: me.loader.getImage('gaka_games') });
-        this.gaka_games_shadow = new me.Sprite(x + 320 + 1, y + 240 + 10 + 1, { image: me.loader.getImage('gaka_games') });
-        this.gaka_games_shadow.tint = new me.Color(0, 0, 0);
-        me.game.world.addChild(this.mb, 2);
-        me.game.world.addChild(this.gaka_games, 3);
-        me.game.world.addChild(this.gaka_games_shadow, 2);
+        this.mb = new me.Sprite(x + 135, y + 240 + 10, { image: me.loader.getImage('little_mb') });
+        me.game.world.addChild(this.mb, 3);
 
         // change to play state on press Enter or click/tap
         me.input.bindKey(me.input.KEY.ENTER, "enter", true);
         me.input.bindKey(me.input.KEY.Q, "enter", true);
-        me.input.bindKey(me.input.KEY.I, "enter", true);
         me.input.bindKey(me.input.KEY.NUM1, "enter", true);
         me.input.bindPointer(me.input.pointer.LEFT, me.input.KEY.ENTER);
         this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
@@ -150,8 +143,8 @@ game.TitleScreen = me.Stage.extend({
         me.game.world.removeChild(this.txt_2020);
         me.game.world.removeChild(this.txt_2020_shadow);
         me.game.world.removeChild(this.mb);
-        me.game.world.removeChild(this.gaka_games);
-        me.game.world.removeChild(this.gaka_games_shadow);
+        //me.game.world.removeChild(this.gaka_games);
+        //me.game.world.removeChild(this.gaka_games_shadow);
         me.audio.stopTrack();
         me.input.unbindKey(me.input.KEY.ENTER);
         me.input.unbindKey(me.input.KEY.Q);

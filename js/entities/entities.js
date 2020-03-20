@@ -41,7 +41,7 @@ game.PlayerEntity = me.Entity.extend({
                 is_anim_2d: true,
                 aud_func: function(self, stack_cnt) {
                     self.play_random_sound(["kick_0", "punch_1"]);
-                    self.play_random_sound(["mb_daa", "mb_ya", "mb_maja"]);
+                    self.play_random_sound(["mb_daa", "mb_maja"]);
                 },
                 rofs: [112, 84, 56]
             },

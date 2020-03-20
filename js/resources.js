@@ -17,7 +17,6 @@ game.resources = [
     { "name": "bond", "type": "audio", "src": "data/sfx/" },
     { "name": "mb_daa", "type": "audio", "src": "data/sfx/" },
     { "name": "mb_maja", "type": "audio", "src": "data/sfx/" },
-    { "name": "mb_ya", "type": "audio", "src": "data/sfx/" },
 
     { "name": "PressStart2P", "type": "image", "src": "data/fnt/PressStart2P.png" },
     { "name": "PressStart2P", "type": "binary", "src": "data/fnt/PressStart2P.fnt" },
@@ -25,7 +24,6 @@ game.resources = [
     { "name": "moonrona", "type": "image", "src": "data/img/gui/moonrona.png" },
     { "name": "coronabomb", "type": "image", "src": "data/img/gui/coronabomb.png" },
     { "name": "gakatv", "type": "image", "src": "data/img/gui/gakatv.png" },
-    { "name": "gaka_games", "type": "image", "src": "data/img/gui/gaka_games.png" },
 
     { "name": "button_q", "type": "image", "src": "data/img/gui/button_q.png" },
     { "name": "button_w", "type": "image", "src": "data/img/gui/button_w.png" },
