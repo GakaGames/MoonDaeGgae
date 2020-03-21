@@ -1,9 +1,6 @@
 game.resources = [
-    {
-        "name": "fighting",
-        "type": "audio",
-        "src": "data/bgm/"
-    },
+    { "name": "bgm_start", "type": "audio", "src": "data/bgm/" },
+    { "name": "bgm_loop", "type": "audio", "src": "data/bgm/" },
 
     { "name": "dingdong", "type": "audio", "src": "data/sfx/" },
 

@@ -7,7 +7,9 @@ game.PlayScreen = me.Stage.extend({
         game.data.score = 0;
 
         // BGM
-        me.audio.playTrack("fighting");
+        me.audio.play("bgm_start", false, function() {
+            me.audio.playTrack("bgm_loop", 0.6);
+        }, 0.6);
 
         // Background
         var backgroundImage = new me.Sprite(0, 0, {
