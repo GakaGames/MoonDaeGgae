@@ -5,7 +5,6 @@ game.resources = [
         "src": "data/bgm/"
     },
 
-    { "name": "jjoint", "type": "audio", "src": "data/sfx/" },
     { "name": "dingdong", "type": "audio", "src": "data/sfx/" },
 
     { "name": "punch_1", "type": "audio", "src": "data/sfx/" },
@@ -23,7 +22,6 @@ game.resources = [
 
     { "name": "moonrona", "type": "image", "src": "data/img/gui/moonrona.png" },
     { "name": "coronabomb", "type": "image", "src": "data/img/gui/coronabomb.png" },
-    { "name": "gakatv", "type": "image", "src": "data/img/gui/gakatv.png" },
 
     { "name": "button_q", "type": "image", "src": "data/img/gui/button_q.png" },
     { "name": "button_w", "type": "image", "src": "data/img/gui/button_w.png" },
