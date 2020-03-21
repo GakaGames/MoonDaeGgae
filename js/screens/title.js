@@ -54,7 +54,6 @@ game.TitleScreen = me.Stage.extend({
                 image: me.loader.getImage('moonrona'),
             }
         );
-        this.counter = 0;
         this.backgroundImage = backgroundImage;
 
         // BGM
@@ -143,12 +142,9 @@ game.TitleScreen = me.Stage.extend({
         me.game.world.removeChild(this.txt_2020);
         me.game.world.removeChild(this.txt_2020_shadow);
         me.game.world.removeChild(this.mb);
-        //me.game.world.removeChild(this.gaka_games);
-        //me.game.world.removeChild(this.gaka_games_shadow);
         me.audio.stopTrack();
         me.input.unbindKey(me.input.KEY.ENTER);
         me.input.unbindKey(me.input.KEY.Q);
-        me.input.unbindKey(me.input.KEY.I);
         me.input.unbindKey(me.input.KEY.NUM1);
         me.input.unbindPointer(me.input.pointer.LEFT);
         me.event.unsubscribe(this.handler);
